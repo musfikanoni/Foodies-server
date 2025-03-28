@@ -38,7 +38,21 @@ async function run() {
       const newFood = req.body;
       const result = await FoodsCollection.insertOne(newFood);
       res.send(result);
+    });
+
+
+    app.get('/foods', async(req,res) => {
+      const cursor = FoodsCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
     })
+
+    // app.get('/', async (req, res) => {
+    //   const result = await servicesCollection.find().limit(8).toArray();
+    //   res.send(result);
+    // });
+
+
 
 
     await client.db("admin").command({ ping: 1 });
